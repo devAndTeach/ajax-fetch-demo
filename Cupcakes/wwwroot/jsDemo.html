@@ -1,0 +1,73 @@
+﻿<html>
+<head>
+    <meta content="text/html; charset = ISO-8859-1" http-equiv="content-type">
+
+    <link href="css/styles.css" rel="stylesheet" />
+   
+
+    <title>ASP.NET Core Ajax Demo</title>
+</head>
+
+<body>
+    <h1>First Cupcake</h1>
+
+    <table id="services">
+        <tr><th>Description</th><th>Caloric Value</th></tr>
+        <tr>
+            <td><div id="cupcake">Hostess Cupcake</div></td>
+            <td><div id="calories">500</div></td>
+        </tr>
+    </table>
+
+    <div>
+        <button type="button" onclick="loadJSON()">Update Details </button>
+    </div>
+    <script>
+        function loadJSON() {
+           var URI = "/Cupcake/AllCupcakes";
+           var http_request = new XMLHttpRequest();
+           try{
+              // Opera 8.0+, Firefox, Chrome, Safari
+              http_request = new XMLHttpRequest();
+           }catch (e) {
+              // Internet Explorer Browsers
+              try{
+                 http_request = new ActiveXObject("Msxml2.XMLHTTP");
+
+              }catch (e) {
+
+                 try{
+                    http_request = new ActiveXObject("Microsoft.XMLHTTP");
+                 }catch (e) {
+                    // Something went wrong
+                    alert("Your browser broke!");
+                    return false;
+                 }
+
+              }
+           }
+
+           http_request.onreadystatechange = function() {
+
+              if (http_request.readyState == 4  ) {
+                 // Javascript function JSON.parse to parse JSON data
+                 var cupcakesList = JSON.parse(http_request.responseText);
+
+                 // cupcakesList variable now contains a JSON array
+                 // Access the first object in the list using indexing notation.
+
+                 document.getElementById("cupcake").innerHTML = cupcakesList[0].description;
+                 document.getElementById("calories").innerHTML = cupcakesList[0].caloricValue;
+              }
+           }
+
+           http_request.open("GET", URI, true);
+           http_request.send();
+        }
+
+    </script>
+</body>
+
+
+
+</html>
