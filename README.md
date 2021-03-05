@@ -1,3 +1,3 @@
 # AJAX FETCH DEMO
-# Start the application 
-# Visit  http://localhost:&lt;port&gt;/jsDemo.html
+# Start the application using Visual Studio 2017 or above
+# Visit  http://localhost:[port]/jsDemo.html to tryout Ajax technique
